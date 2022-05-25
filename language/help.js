@@ -898,7 +898,12 @@ exports.anonymousmenu = (prefix) => {
 
 exports.islamicmenu = (prefix) => {
 	return`
-
+  *ISLAMIC MENU*
+  *≻* ${prefix}iqra
+  *≻* ${prefix}hadist
+  *≻* ${prefix}alquran
+  *≻* ${prefix}juzamma
+  *≻* ${prefix}tafsirsurah
   `
 }
 
