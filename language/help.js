@@ -383,13 +383,6 @@ return`  _Selamat ${salam} kak ${pushname}_
   *≻* ${prefix}keluar
   *≻* ${prefix}sendkontak
   
-  *ISLAMIC MENU*
-  *≻* ${prefix}iqra
-  *≻* ${prefix}hadist
-  *≻* ${prefix}alquran
-  *≻* ${prefix}juzamma
-  *≻* ${prefix}tafsirsurah
-  
   *VOICE CHANGER*
   *≻* ${prefix}bass
   *≻* ${prefix}blown
@@ -422,7 +415,7 @@ return`  _Selamat ${salam} kak ${pushname}_
   *≻* ZeeoneOfc
   *≻* FatihArridho
   *≻* Yoga
-  *≻* Riy
+  *≻* Bayu
   *≻* Deff
   *≻* Sanzy
   *≻* Nekel
@@ -905,12 +898,7 @@ exports.anonymousmenu = (prefix) => {
 
 exports.islamicmenu = (prefix) => {
 	return`
-  *ISLAMIC MENU*
-  *≻* ${prefix}iqra
-  *≻* ${prefix}hadist
-  *≻* ${prefix}alquran
-  *≻* ${prefix}juzamma
-  *≻* ${prefix}tafsirsurah
+
   `
 }
 
@@ -957,7 +945,7 @@ exports.thanksto = () => {
   *≻* ZeeoneOfc
   *≻* FatihArridho
   *≻* Yoga
-  *≻* Riy
+  *≻* Bayu
   *≻* Deff
   *≻* Sanzy
   *≻* Nekel
