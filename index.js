@@ -1,5 +1,5 @@
 /*
-› Create By @RIY
+› Create By @Yuu
 › Base Ori @DikaArdnt
 › Kalau mau ubah/edit owner di settings.js
 › Edit text menu di file language › help.js
@@ -14,6 +14,7 @@ const { exec, spawn, execSync } = require("child_process")
 const axios = require('axios')
 const path = require('path')
 const os = require('os')
+const { bahasa } = require('./lib/bahasa')
 const moment = require('moment-timezone')
 const { JSDOM } = require('jsdom')
 const speed = require('performance-now')
@@ -83,6 +84,9 @@ module.exports = chika = async (chika, m, chatUpdate, store) => {
     	const isBotAdmins = m.isGroup ? groupAdmins.includes(botNumber) : false
     	const isAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
     	const isPremium = isCreator || global.premium.map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender) || false
+        const isUrl = (url) => {
+		  return url.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/, 'gi'))
+			}
 
         // Fake
         const ftroli ={key: {fromMe: false,"participant":"0@s.whatsapp.net", "remoteJid": "6289523258649-1604595598@g.us"}, "message": {orderMessage: {itemCount: 2021,status: 200, thumbnail: thumb, surface: 200, message: `© ${ownername}`, orderTitle: 'memek', sellerJid: '0@s.whatsapp.net'}}, contextInfo: {"forwardingScore":999,"isForwarded":true},sendEphemeral: true}
@@ -744,6 +748,19 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
                     await chika.sendButtonText(m.chat, buttons, jawab, ownername, m, {mentions: ments})
             }
             break
+case 'neonlightglitch':
+if (args.length < 1) return reply(`*Teks nya mana?*\n_Contoh : ${prefix + command} namamu_`) 
+teks = args.join(" ")
+reply(mess.wait)
+anu = await fetchJson(`https://apidhani.herokuapp.com/api/textpro/${command}?apikey=NisaaCantik&text=${teks}`)
+oke = await getBuffer(anu.result)
+chika.sendMessage(from, oke, image, {quoted: mek, caption: '*Nih Kak Dah Jadi*'})
+break
+case 'attp': case 'ttp': {
+           if (!text) throw `Example : ${prefix + command} text`
+           await chika.sendMedia(m.chat, `https://xteam.xyz/${command}?file&text=${text}`, 'kagura', 'morou', m, {asSticker: true})
+         }
+         break
             case 'jadian': {
             if (!m.isGroup) return reply(mess.group)
             let member = participants.map(u => u.id)
@@ -761,7 +778,7 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
             break
             case 'apakah':
 				if (!q) return reply(`Penggunaan ${command} text\n\nContoh : ${command} saya wibu`)
-					const apa = ['Iya', 'Tidak', 'Bisa Jadi', 'Betul']
+					const apa = ['Iya', 'Tidak', 'mungkin tidak' ,'Bisa Jadi', 'Betul']
 					const kah = apa[Math.floor(Math.random() * apa.length)]
 chika.sendMessage(from, { text: `Pertanyaan : Apakah ${q}\nJawaban : ${kah}` }, { quoted: m })
 
@@ -775,9 +792,16 @@ chika.sendMessage(from, { text: `Pertanyaan : ${q}\nJawaban : ${ga}` }, { quoted
 					break
 case 'bagaimanakah':
 				if (!q) return reply(`Penggunaan ${command} text\n\nContoh : ${command} saya wibu`)
-					const gimana = ['Gak Gimana2', 'Sulit Itu Bro', 'Maaf Bot Tidak Bisa Menjawab', 'Coba Deh Cari Di Gugel','astaghfirallah Beneran???','Pusing ah','Owhh Begitu:(','Yang Sabar Ya Bos:(','Gimana yeee']
+					const gimana = ['Gak Gimana2', 'Sulit Itu Bro', 'Maaf Bot Tidak Bisa Menjawab', 'Coba Deh Cari Di Gugel','Pusing ah','Owhh Begitu:(','Yang Sabar Ya Bos:(','Gimana yeee']
 					const ya = gimana[Math.floor(Math.random() * gimana.length)]
 chika.sendMessage(from, { text: `Pertanyaan : ${q}\nJawaban : ${ya}` }, { quoted: m })
+
+					break
+case 'berapakah':
+				if (!q) return reply(`Penggunaan ${command} text\n\nContoh : ${command} saya wibu`)
+					const berapa = ['2','3','5','8','10','15','20','25']
+					const pa = berapa[Math.floor(Math.random() * berapa.length)]
+chika.sendMessage(from, { text: `Pertanyaan : ${q}\nJawaban : ${pa}` }, { quoted: m })
 
 					break
 case 'rate':
@@ -1371,7 +1395,7 @@ break
                     chika.sendText(m.chat, 'List Online:\n\n' + online.map(v => '⭔ @' + v.replace(/@.+/, '')).join`\n`, m, { mentions: online })
              }
              break
-            case 'sticker': case 's': case 'stickergif': case 'sgif': {
+            case 'sticker': case 'stiker': case 's': case 'stickergif': case 'sgif': {
             if (!quoted) throw `Balas Video/Image Dengan Caption ${prefix + command}`
             reply(mess.wait)
                     if (/image/.test(mime)) {
@@ -1836,7 +1860,7 @@ case 'webtonsearch': case 'webtoon':
                     reply(mess.error)
                 })
             break
-            case 'waifu': case 'husbu': case 'neko': case 'shinobu': case 'megumin': case 'waifus': case 'nekos': case 'trap': case 'blowjob': {
+            case 'waifu': case 'husbu': case 'neko': case 'shinobu': case 'megumin': case 'trap': {
                 reply(mess.wait)
                 chika.sendMessage(m.chat, { image: { url: api('zenz', '/api/random/'+command, {}, 'apikey') }, caption: 'Generate Random ' + command }, { quoted: m })
             }
@@ -1849,6 +1873,82 @@ case 'webtonsearch': case 'webtoon':
                 chika.sendMessage(m.chat, { image: { url: random.female }, caption: `Couple Female` }, { quoted: m })
             }
 	    break
+case 'nulis': {
+if (args.length < 1) return ads(`Example :\n${prefix}nulis Bayu|91|#ff020a|text`)
+const nls = args.join(" ")
+const nams = "Nama : " + nls.split("|")[0];
+const kels = "Kelas : " + nls.split("|")[1];
+const menlise = nls.split("|")[3];
+const codewarn = nls.split("|")[2];
+await ads('Sedang menulis')
+const jangkale = menlise.replace(/(\S+\s*){1,10}/g, '$&\n')
+const jangbare = jangkale.split('\n').slice(0, 30).join('\n')
+const jangnam = nams.replace(/(\S+\s*){1,10}/g, '$&\n')
+const jangkel = kels.replace(/(\S+\s*){1,10}/g, '$&\n')
+if (kels.length > 12) return ads("Jumlah teks kelas maximal 4")
+if (nams.length > 34) return ads("Jumlah teks nama maximal 27")
+if (codewarn.length > 7) return ads("Jumlah teks warna maximal 7")
+console.log('「 MENULIS 」Sedang dalam prosses')
+spawn('convert', [
+'./media/image/magernulis.jpg',
+'-fill',
+codewarn,
+'-font',
+'./media/font/nulis.ttf',
+'-size',
+'1024x784',
+'-pointsize',
+'20',
+'-interline-spacing',
+'1',
+'-annotate',
+'+806+78',
+janghar,
+'-size',
+'1024x784',
+'-pointsize',
+'18',
+'-interline-spacing',
+'1',
+'-annotate',
+'+806+102',
+jangwak,
+'-size',
+'1024x784',
+'-pointsize',
+'21',
+'-interline-spacing',
+'1',
+'-annotate',
+'+285+90',
+jangnam,
+'-size',
+'1024x784',
+'-pointsize',
+'21',
+'-interline-spacing',
+'1',
+'-annotate',
+'+285+110',
+jangkel,
+'-size',
+'1024x784',
+'-pointsize',
+'20',
+'-interline-spacing',
+'-7.5',
+'-annotate',
+'+344+146',
+jangbare,
+'./storage/hasilnulis.jpg'
+])
+.on('error', () => ads('Error') )
+.on('exit', () => {
+chika.sendMessage(from, {image:fs.readFileSync('./worker/storage/hasilnulis.jpg'), caption:'Succes'}, {quoted:m}).catch(() => ads('```「 GAGAL 」Terjadi kesalahan dalam mengirim file```'))
+})
+exec(`npm i marker`)
+}
+break
             case 'coffe': case 'kopi': {
             reply(mess.wait)
             let buttons = [
@@ -1864,6 +1964,11 @@ case 'webtonsearch': case 'webtoon':
                 chika.sendMessage(m.chat, buttonMessage, { quoted: m })
             }
             break
+case 'attp':
+if (!q) return reply("Textnya mana kak")
+nyz200 = await getBuffer(`https://myselfff.herokuapp.com/docs/random/attp?query=${q}`)
+chika.sendMessage(from, {sticker:nyz200}, {quoted: m })
+break
             case 'wikimedia': {
                 if (!text) throw 'Masukkan Query Title'
 		let { wikimedia } = require('./lib/scraper')
@@ -3363,6 +3468,10 @@ case 'randomanimemenu':
 var riych = await getBuffer(picak+'Random Anime Menu')
 await chika.send5ButImg(from, `` + '' + lang.randomanimemenu(prefix), `  © ${ownername}`,riych, [{"urlButton": {"displayText": "YouTube Creator","url": `${youtube}`}},{"urlButton": {"displayText": `Rest Api's`,"url": `${myweb}`}},{"quickReplyButton": {"displayText": "Donasi","id": 'donate'}},{"quickReplyButton": {"displayText": "Back List","id": 'command'}}] )
 break
+case 'kodenuklir':
+var riych = await getBuffer(picak+'kode nuklir')
+await chika.send5ButImg(from, `` + '' + lang.kodenuklir(prefix), `  © ${ownername}`,riych, [{"urlButton": {"displayText": "YouTube Creator","url": `${youtube}`}},{"urlButton": {"displayText": `Rest Api's`,"url": `${myweb}`}},{"quickReplyButton": {"displayText": "Donasi","id": 'donate'}},{"quickReplyButton": {"displayText": "Back List","id": 'command'}}] )
+break
 case 'searchmenu':
 var riych = await getBuffer(picak+'Search Menu')
 await chika.send5ButImg(from, `` + '' + lang.searchmenu(prefix), `  © ${ownername}`,riych, [{"urlButton": {"displayText": "YouTube Creator","url": `${youtube}`}},{"urlButton": {"displayText": `Rest Api's`,"url": `${myweb}`}},{"quickReplyButton": {"displayText": "Donasi","id": 'donate'}},{"quickReplyButton": {"displayText": "Back List","id": 'command'}}] )
@@ -3410,10 +3519,6 @@ break
 case 'anonymousmenu':
 var riych = await getBuffer(picak+'Anonymous Menu')
 await chika.send5ButImg(from, `` + '' + lang.anonymousmenu(prefix), `  © ${ownername}`,riych, [{"urlButton": {"displayText": "YouTube Creator","url": `${youtube}`}},{"urlButton": {"displayText": `Rest Api's`,"url": `${myweb}`}},{"quickReplyButton": {"displayText": "Donasi","id": 'donate'}},{"quickReplyButton": {"displayText": "Back List","id": 'command'}}] )
-break
-case 'islamicmenu':
-var riych = await getBuffer(picak+'Islamic Menu')
-await chika.send5ButImg(from, `` + '' + lang.islamicmenu(prefix), `  © ${ownername}`,riych, [{"urlButton": {"displayText": "YouTube Creator","url": `${youtube}`}},{"urlButton": {"displayText": `Rest Api's`,"url": `${myweb}`}},{"quickReplyButton": {"displayText": "Donasi","id": 'donate'}},{"quickReplyButton": {"displayText": "Back List","id": 'command'}}] )
 break
 case 'voicechargermenu':
 var riych = await getBuffer(picak+'Voice Charger Menu')
